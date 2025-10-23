@@ -1,49 +1,39 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
+interface Customer {
+  CustomerId: number;
+  CompanyName: string;
+  ContactName: string;
+}
+
 function App() {
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState("unknown");
+  const [customers, setCustomers] = useState<Customer[] | null>(null);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
       <div className="card">
         <button
           onClick={() => {
-            fetch("/api/")
-              .then((res) => res.json() as Promise<{ name: string }>)
-              .then((data) => setName(data.name));
+            fetch("/api/beverages")
+              .then((res) => res.json() as Promise<Customer[]>)
+              .then((data) => setCustomers(data));
           }}
           aria-label="get name"
         >
-          Name from API is: {name}
+          Get customers from Bs Beverages
         </button>
-        <p>
-          Edit <code>worker/index.ts</code> to change the name
-        </p>
+
+        {customers ? (
+          <ol>
+            {customers.map((customer) => (
+              <li style={{ textAlign: "left" }} key={customer.CustomerId}>
+                {customer.ContactName}, {customer.CompanyName}
+              </li>
+            ))}
+          </ol>
+        ) : null}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }

@@ -1,17 +1,16 @@
 {
-	"name": "comments",
-	"compatibility_date": "2025-04-03",
-	"assets": {
-		"directory": "./dist/",
-		"not_found_handling": "single-page-application"
-	},
-	"main": "./worker/index.ts",
-	"d1_databases": [
-		{
-			"binding": "comments",
-			"database_name": "comments",
-			"database_id": "8b39b066-fd90-401c-b675-ab987a5710b4",
-			"remote": true
-		}
-	]
+  "name": "comments",
+  "compatibility_date": "2025-04-03",
+  "assets": {
+    "directory": "./dist/",
+    "not_found_handling": "single-page-application"
+  },
+  "main": "./worker/index.ts",
+  "d1_databases": [
+    {
+      "binding": "comments",
+      "database_name": "comments",
+      "database_id": "8b39b066-fd90-401c-b675-ab987a5710b4"
+    }
+  ]
 }

@@ -1,13 +1,21 @@
-export default {
-  fetch(request) {
-    const url = new URL(request.url);
+export interface Env {
+  comments: D1Database;
+}
 
-    if (url.pathname.startsWith("/api/")) {
-      return Response.json({
-        name: "Mert",
-      });
+export default {
+  async fetch(request, env): Promise<Response> {
+    const { pathname } = new URL(request.url);
+
+    if (pathname === "/api/beverages") {
+      const { results } = await env.comments
+        .prepare("SELECT * FROM Customers WHERE CompanyName = ?")
+        .bind("Bs Beverages")
+        .run();
+      return Response.json(results);
     }
 
-    return new Response(null, { status: 404 });
+    return new Response(
+      "Call /api/beverages to see everyone who works at Bs Beverages"
+    );
   },
-} satisfies ExportedHandler;
+} satisfies ExportedHandler<Env>;
