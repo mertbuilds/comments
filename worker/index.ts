@@ -1,5 +1,5 @@
 export interface Env {
-  comments: D1Database;
+  DB: D1Database;
 }
 
 export default {
@@ -7,8 +7,9 @@ export default {
     const { pathname } = new URL(request.url);
 
     if (pathname === "/api/beverages") {
-      const { results } = await env.comments
-        .prepare("SELECT * FROM Customers WHERE CompanyName = ?")
+      const { results } = await env.DB.prepare(
+        "SELECT * FROM Customers WHERE CompanyName = ?"
+      )
         .bind("Bs Beverages")
         .run();
       return Response.json(results);

@@ -8,7 +8,7 @@
   "main": "./worker/index.ts",
   "d1_databases": [
     {
-      "binding": "comments",
+      "binding": "DB",
       "database_name": "comments",
       "database_id": "8b39b066-fd90-401c-b675-ab987a5710b4"
     }
